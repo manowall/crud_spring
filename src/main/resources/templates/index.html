@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>CRUD Prueba</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Todos los Libros</h1>
+        <div th:if="${libros != null and !libros.empty}">
+            <table border="1">
+                <tr>
+                    <th>Nombre:</th>
+                    <th>Páginas:</th>
+                    <th>Autor:</th>
+                    <th>Género:</th>
+                    <th>Actualizar</th>
+                    <th>Borrar</th>
+                </tr>
+                <tr th:each="libro:${libros}">
+                    <td th:text="${libro.nombre}"></td>
+                    <td th:text="${libro.paginas}"></td>
+                    <td th:text="${libro.autor}"></td>
+                    <td th:text="${libro.genero}"></td>
+                    <td><a th:href="@{/editar/} + ${libro.id_libro}" th:text="Editar"></a></td>
+                    <td><a th:href="@{/eliminar/} + ${libro.id_libro}" th:text="Eliminar"></a></td>
+                </tr>
+            </table>
+        </div>
+        <a th:href="@{/agregar}">Agregar un Libro</a>
+        <div th:if="${libros == null or libros.empty}">
+            <h2>Los libros no se pueden desplegar. NO hay registros.</h2>
+        </div>
+    </body>
+</html>
